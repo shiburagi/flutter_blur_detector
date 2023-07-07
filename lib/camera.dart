@@ -36,7 +36,12 @@ mixin CameraHelper<T extends StatefulWidget> on State<T> {
       setState(() {
         _cameras = value;
         debugPrint("_cameras: $_cameras");
-        if (_cameras.isNotEmpty) initializeCameraController(_cameras.first);
+
+        if (_cameras.isNotEmpty) {
+          initializeCameraController(_cameras.firstWhere(
+              (element) => element.lensDirection == CameraLensDirection.back,
+              orElse: () => _cameras.first));
+        }
       });
     });
   }
