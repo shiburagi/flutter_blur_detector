@@ -633,3 +633,7 @@ build/tflite/intermediates/navigation_json/debug/navigation.json
 build/tflite/intermediates/packaged_manifests/debug/output-metadata.json
 build/tflite/outputs/logs/manifest-merger-debug-report.txt
 assets/.DS_Store
+lib/.DS_Store
+.gitignore
+web/.DS_Store
+.DS_Store
