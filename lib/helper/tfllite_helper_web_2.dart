@@ -19,7 +19,7 @@ class PlatformTFLiteHelper implements BaseTFLiteHelper {
   @override
   Future<String?> load({required String model, String? labelsPath}) {
     TFLiteWeb.initialize().then((value) async {
-      _tfLieModel = await TFLiteModel.fromUrl(model);
+      _tfLieModel = await TFLiteModel.fromUrl("assets/$model");
       print("initilize");
     }).catchError((e) {
       print(e);

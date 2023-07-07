@@ -118,6 +118,7 @@ class _ClassifyState extends State<Classify>
       _busy = false;
     });
 
+    closeCamera();
     _setLoading(false);
   }
 

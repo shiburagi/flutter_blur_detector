@@ -147,11 +147,15 @@ mixin CameraHelper<T extends StatefulWidget> on State<T> {
     }
 
     if (state == AppLifecycleState.inactive) {
-      cameraController.dispose();
-      timer?.cancel();
+      closeCamera();
     } else if (state == AppLifecycleState.resumed) {
       initializeCameraController(cameraController.description);
     }
+  }
+
+  closeCamera() {
+    controller?.dispose();
+    timer?.cancel();
   }
 
   void onImage(CameraImage image) {}
