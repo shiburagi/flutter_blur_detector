@@ -46,6 +46,7 @@ mixin CameraHelper<T extends StatefulWidget> on State<T> {
     });
   }
 
+  var isTakePhoto = false;
   Future<void> initializeCameraController(
       CameraDescription cameraDescription) async {
     final CameraController cameraController = CameraController(
@@ -57,10 +58,13 @@ mixin CameraHelper<T extends StatefulWidget> on State<T> {
 
     controller = cameraController;
     timer?.cancel();
-
-    timer = Timer.periodic(Duration(seconds: 1), (timer) async {
+    isTakePhoto = false;
+    timer = Timer.periodic(const Duration(milliseconds: 200), (timer) async {
+      if (isTakePhoto) return;
+      isTakePhoto = true;
       final file = await controller?.takePicture();
-      onTake(file);
+      await onTake(file);
+      isTakePhoto = false;
     });
     // controller?.startImageStream((image) {
     //   onImage(image);
@@ -164,5 +168,5 @@ mixin CameraHelper<T extends StatefulWidget> on State<T> {
   }
 
   void onImage(CameraImage image) {}
-  void onTake(XFile? image) {}
+  Future onTake(XFile? image) async {}
 }

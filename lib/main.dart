@@ -319,17 +319,16 @@ class _ClassifyState extends State<Classify>
 
   @override
   void onImage(CameraImage image) {
-    // TODO: implement onImage
     super.onImage(image);
     TFLiteHelper.instance.predictBytes(image.planes.first.bytes);
   }
 
   @override
-  void onTake(XFile? image) async {
-    // TODO: implement onTake
+  Future onTake(XFile? image) async {
     super.onTake(image);
-    if (image != null)
+    if (image != null) {
       updateStateInfo(
           await TFLiteHelper.instance.predictBytes(await image.readAsBytes()));
+    }
   }
 }
